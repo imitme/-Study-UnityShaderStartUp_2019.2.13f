@@ -41,7 +41,7 @@
 			{
 				float4 test = float4(1,0,0,1);
 				fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-				o.Albedo = test;
+				o.Albedo = test.rgb;
 
 				o.Alpha = c.a;
 			}
