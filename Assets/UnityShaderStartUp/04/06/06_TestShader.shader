@@ -6,6 +6,7 @@
 		_MainTex("Albedo (RGB)", 2D) = "white" {}
 		_Glossiness("Smoothness", Range(0,1)) = 0.5
 		_Metallic("Metallic", Range(0,1)) = 0.0
+		_TestColor("testcolor", Color) = (1,1,1,1) //Color 는 float4(R,G,B,A) 가짐.
 	}
 		SubShader
 		{
