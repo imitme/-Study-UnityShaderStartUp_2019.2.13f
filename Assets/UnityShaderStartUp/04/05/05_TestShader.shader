@@ -29,7 +29,6 @@
 			half _Glossiness;
 			half _Metallic;
 			fixed4 _Color;
-			float4 test;//함수 밖 선언
 
 			// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
 			// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -40,10 +39,8 @@
 
 			void surf(Input IN, inout SurfaceOutputStandard o)
 			{
-				//test = float4(1,0,0,1);
 				fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-				o.Albedo = test.rgb; //검정 >>오류? 색을 정하기 않았기에, 기본이 000인듯?
-
+				o.Albedo = c.rgb;
 				o.Alpha = c.a;
 			}
 			ENDCG
