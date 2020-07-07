@@ -30,11 +30,15 @@
 			half _Glossiness;
 			half _Metallic;
 			fixed4 _Color;
+			float4 _TestColor;
 
+			//출력부분 ㄱ
 			void surf(Input IN, inout SurfaceOutputStandard o)
 			{
 				fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-				o.Albedo = c.rgb;
+				//o.Albedo = c.rgb;
+				o.Albedo = _TestColor.rgb; //SurfaceOutputStandard 의 Albedo는 float3 이고 >>_TestColor는 float4이기에, .rgb 로 3개만 사용!
+				o.Emission = _TestColor.rgb; //Albedo대신 사용 가능, 취향에 따라 선택
 				o.Metallic = _Metallic;
 				o.Smoothness = _Glossiness;
 				o.Alpha = c.a;
