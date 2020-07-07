@@ -9,6 +9,7 @@
 		_Red("Red", Range(0,1)) = 0
 		_Green("Green", Range(0,1)) = 0
 		_Blue("Blue", Range(0,1)) = 0 //Red,Green,Blue 변수선언시, '예약어'이기에 주의필요
+		_BrightDark("Brightness $ Darkness", Range(-1,1)) = 0 //(0,1) 단순밝아짐. (-1,1) 어둡고 밝아짐
 	}
 		SubShader
 		{
@@ -36,12 +37,14 @@
 			float _Red;
 			float _Green;
 			float _Blue;
+			float _BrightDark;
 
 			void surf(Input IN, inout SurfaceOutputStandard o)
 			{
 				fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
 
 				o.Albedo = float3(_Red, _Green, _Blue);
+				o.Albedo = float3(_Red, _Green, _Blue) + _BrightDark;
 				o.Alpha = c.a;
 			}
 			ENDCG
