@@ -41,7 +41,7 @@
 			{
 				float4 test = float4(1,0,0,1);
 				fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-				o.Albedo = test.rgb;
+				o.Albedo = test.b; //검정  				//o.Albedo = test.grb; 초록 //o.Albedo = test.bgr; 파랑 //o.Albedo = test.rrr 흰색 //o.Albedo = test.b; 검정 ==(1,1,1) //스위즐링(Swizzling : 변수의 부분값을 자유자재로 바꾸는 것)
 
 				o.Alpha = c.a;
 			}
