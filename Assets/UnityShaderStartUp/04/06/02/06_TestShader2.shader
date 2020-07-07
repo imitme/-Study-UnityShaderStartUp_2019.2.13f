@@ -6,6 +6,9 @@
 		_MainTex("Albedo (RGB)", 2D) = "white" {}
 		_Glossiness("Smoothness", Range(0,1)) = 0.5
 		_Metallic("Metallic", Range(0,1)) = 0.0
+		_Red("Red", Range(0,1)) = 0
+		_Green("Green", Range(0,1)) = 0
+		_Blue("Blue", Range(0,1)) = 0 //Red,Green,Blue 변수선언시, '예약어'이기에 주의필요
 	}
 		SubShader
 		{
@@ -29,12 +32,16 @@
 			half _Glossiness;
 			half _Metallic;
 			fixed4 _Color;
+			//Properties 와 같은 크기&이름 변수 선언 ㄱ
+			float _Red;
+			float _Green;
+			float _Blue;
 
 			void surf(Input IN, inout SurfaceOutputStandard o)
 			{
 				fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
 
-				o.Albedo = c.rgb;
+				o.Albedo = float3(_Red, _Green, _Blue);
 				o.Alpha = c.a;
 			}
 			ENDCG
