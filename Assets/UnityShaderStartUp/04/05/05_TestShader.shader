@@ -29,6 +29,7 @@
 			half _Glossiness;
 			half _Metallic;
 			fixed4 _Color;
+			float4 test;//함수 밖 선언
 
 			// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
 			// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -39,9 +40,9 @@
 
 			void surf(Input IN, inout SurfaceOutputStandard o)
 			{
-				float4 test = float4(1,0,0,1);
+				//test = float4(1,0,0,1);
 				fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-				o.Albedo = test.b; //검정  				//o.Albedo = test.grb; 초록 //o.Albedo = test.bgr; 파랑 //o.Albedo = test.rrr 흰색 //o.Albedo = test.b; 검정 ==(1,1,1) //스위즐링(Swizzling : 변수의 부분값을 자유자재로 바꾸는 것)
+				o.Albedo = test.rgb; //검정 >>오류? 색을 정하기 않았기에, 기본이 000인듯?
 
 				o.Alpha = c.a;
 			}
