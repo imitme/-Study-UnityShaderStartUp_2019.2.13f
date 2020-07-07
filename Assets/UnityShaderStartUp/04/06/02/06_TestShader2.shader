@@ -2,10 +2,6 @@
 {
 	Properties
 	{
-		_Color("Color", Color) = (1,1,1,1)
-		_MainTex("Albedo (RGB)", 2D) = "white" {}
-		_Glossiness("Smoothness", Range(0,1)) = 0.5
-		_Metallic("Metallic", Range(0,1)) = 0.0
 		_Red("Red", Range(0,1)) = 0
 		_Green("Green", Range(0,1)) = 0
 		_Blue("Blue", Range(0,1)) = 0 //Red,Green,Blue 변수선언시, '예약어'이기에 주의필요
@@ -27,12 +23,9 @@
 
 			struct Input
 			{
-				float2 uv_MainTex;
+				float4 color : COLOR; //버텍스 컬러 받아오는 구문
 			};
 
-			half _Glossiness;
-			half _Metallic;
-			fixed4 _Color;
 			//Properties 와 같은 크기&이름 변수 선언 ㄱ
 			float _Red;
 			float _Green;
@@ -41,11 +34,10 @@
 
 			void surf(Input IN, inout SurfaceOutputStandard o)
 			{
-				fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
 
 				o.Albedo = float3(_Red, _Green, _Blue);
 				o.Albedo = float3(_Red, _Green, _Blue) + _BrightDark;
-				o.Alpha = c.a;
+				o.Alpha = 1; //불투명
 			}
 			ENDCG
 		}
