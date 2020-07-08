@@ -6,11 +6,11 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Opaque" "Queue"="Transparent"}//2.투명을 위해
 		LOD 200
 
         CGPROGRAM
-        #pragma surface surf Standard 
+        #pragma surface surf Standard alpha:fade //2.투명을 위해
 
         sampler2D _MainTex;
 
@@ -22,7 +22,7 @@
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-            o.Albedo = c.rgb; 
+            o.Emission = c.rgb;  // 1.빛영향X
             o.Alpha = c.a;
         }
         ENDCG
