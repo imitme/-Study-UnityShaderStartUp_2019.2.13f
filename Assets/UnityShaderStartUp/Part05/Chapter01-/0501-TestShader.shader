@@ -9,7 +9,6 @@
         Tags { "RenderType"="Opaque" }
 
         CGPROGRAM
-        #pragma surface surf Standard fullforwardshadows
 
 
         sampler2D _MainTex;
