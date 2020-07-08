@@ -9,7 +9,7 @@
         Tags { "RenderType"="Opaque" }
 
         CGPROGRAM
-
+		#pragma surface surf Standard 
 
         sampler2D _MainTex;
 
@@ -24,6 +24,9 @@
         {
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
             o.Albedo = c.rgb;
+            o.Albedo = (c.r + c.g + c.b)/3; 
+			//ㄴ 각 요소를 각각 더하고, /3하면, 각 요소의 평균을 구한 한자리 숫자가 나온다.
+			//ㄴ float3 을 넣어야 하지만, 한자리 숫자를 넣어도 문제없이 처리됨.
             o.Alpha = c.a;
         }
         ENDCG
