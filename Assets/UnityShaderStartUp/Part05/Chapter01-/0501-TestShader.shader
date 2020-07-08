@@ -38,6 +38,8 @@
 			//ㄴ RGB to YIQ 변환 매트릭스 방식 **
 			o.Albedo = lerp(c.rgb, d.rgb,0.5);
 			o.Albedo = lerp(c.rgb, d.rgb,_lerpTest);
+			o.Albedo = lerp(c.rgb, d.rgb, 1-c.a);
+			o.Albedo = lerp(d.rgb ,c.rgb, c.a); //위랑 같은 수치임! 풀이 1, 배경이 0 이기에!
             o.Alpha = c.a;
         }
         ENDCG
