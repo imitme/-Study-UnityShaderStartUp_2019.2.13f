@@ -25,7 +25,7 @@
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-			fixed4 d = tex2D (_MainTex2, IN.uv_MainTex2);
+			fixed4 d = tex2D (_MainTex2, float2(IN.uv_MainTex2.x, IN.uv_MainTex2.y - _Time.y));
             o.Emission = d.rgb;  // 1.빛영향X
             o.Alpha = d.a;
         }
