@@ -4,6 +4,7 @@
     {
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _MainTex2 ("Albedo (RGB)", 2D) = "white" {}
+		_lerpTest("lerp기능테스트",Range(0,1))=0
     }
     SubShader
     {
@@ -14,6 +15,7 @@
 
         sampler2D _MainTex;
         sampler2D _MainTex2;
+		float _lerpTest;
 
         struct Input
         {
@@ -35,6 +37,7 @@
 			o.Albedo = c.r * 0.2989 + c.g * 0.5870 + c.b * 0.1140; 
 			//ㄴ RGB to YIQ 변환 매트릭스 방식 **
 			o.Albedo = lerp(c.rgb, d.rgb,0.5);
+			o.Albedo = lerp(c.rgb, d.rgb,_lerpTest);
             o.Alpha = c.a;
         }
         ENDCG
