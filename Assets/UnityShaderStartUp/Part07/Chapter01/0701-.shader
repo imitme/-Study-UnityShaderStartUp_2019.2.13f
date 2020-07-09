@@ -26,6 +26,9 @@
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
             //o.Albedo = c.rgb; //결과값 빛영향 받지 않도록 Emission사용하려고, 주석 ;; 주석 풀면 Albedo+Emission 되어, 밝게(하얗게) 됨
             //o.Emission = IN.color.rgb; //2. input구조체 안에 (COLOR 상속받는?)color변수를 사용.
+			o.Albedo =  IN.color.rgb;				//버텍스컬러-기준
+			o.Albedo = c.rgb + IN.color.rgb;		//더해서, 밝게
+			o.Albedo = c.rgb * IN.color.rgb;		//곱해서, 어둡게
             o.Alpha = c.a;
         }
         ENDCG
