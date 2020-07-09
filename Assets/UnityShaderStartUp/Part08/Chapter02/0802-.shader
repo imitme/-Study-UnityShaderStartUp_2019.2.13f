@@ -15,6 +15,7 @@
         _Metallic ("Metallic", Range(0,1)) = 0			//반사정도(0:난반사Diffuse :스페큘러컬러흑백, 1:정반사Specular :스체큘러 컬러 albedo) >>금속은 고유의 스페큘러 컬러를 가지고 있기 떄문에, 그급적 0,1을 사용하는 것이 정확한 물리 기반 쉐이더를 다루는 방법이다.
         _Smoothness ("Smoothness", Range(0,1)) = 0.5	//재질이 매끄러운지 거친지 결정(UNREAL-Roughness)
 		_BumpMap("Normalmap", 2D) = "bump" {}			//이상하지만, 유니티에서 내장으로 bump라고 명칭해 사용하고 있음. //1. 입력받는공간만들고
+		_Occlusion("Occlusion", 2D) = "white" {}		//1. 입력받는공간만들고
     }
     SubShader
     {
@@ -25,6 +26,7 @@
 
         sampler2D _MainTex;
         sampler2D _BumpMap; //2. 변수선언하고
+        sampler2D _Occlusion; //2. 변수선언하고
         float _Metallic;
         float _Smoothness;
 
@@ -48,6 +50,8 @@
 			o.Normal = float3(n.x * 10, n.y * 10, n.z);// 노멀 강도 조절하기 (강한경우)
 			o.Normal = float3(n.x * 0.1, n.y * 0.1, n.z);// 노멀 강도 조절하기 (약한경우) 
 			//ㄴ 강도조절시, z 축은 영향을 끼치지 않기에, 연산해줄 필요 없다. 단,1 이상이라면, 내부적으로 normalize하기에 약해질 수 있다!
+
+			o.Occlusion = tex2D(_Occlusion, IN.uv_MainTex);//4. 변수사용 //독립된UV를 받으면, 에러나니, MainTex꺼 사용.
 			
         }
         ENDCG
