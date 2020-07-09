@@ -6,6 +6,7 @@
         _MainTex2 ("Albedo (RGB)", 2D) = "white" {}
         _MainTex3 ("Albedo (RGB)", 2D) = "white" {}
         _MainTex4 ("Albedo (RGB)", 2D) = "white" {}
+        _BumpMap ("NormalMap", 2D) = "bump" {}
     }
     SubShader
     {
@@ -13,12 +14,14 @@
         LOD 200
 
         CGPROGRAM
+		#pragma target 3.0   //에러떄문에 추가 : Shader error in 'ShaderStudy/Part7/0703-VCMask': Too many texture interpolators would be used for ForwardBase pass (9 out of max 8), try adding #pragma target 3.0 at line 16
         #pragma surface surf Standard noambient
 
         sampler2D _MainTex;
         sampler2D _MainTex2;
         sampler2D _MainTex3;
         sampler2D _MainTex4;
+        sampler2D _BumpMap;
 
         struct Input
         {
@@ -26,6 +29,7 @@
             float2 uv_MainTex2;
             float2 uv_MainTex3;
             float2 uv_MainTex4;	//텍스쳐 담을공간
+            float2 uv_BumpMap;
 			float4 color:COLOR; //버텍스컬러 담은공간
         };
 
@@ -43,6 +47,7 @@
 						+ d.rgb * IN.color.r
 						+ e.rgb * IN.color.g
 						+ f.rgb * IN.color.b				;
+			o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
             o.Alpha = c.a;
         }
         ENDCG
