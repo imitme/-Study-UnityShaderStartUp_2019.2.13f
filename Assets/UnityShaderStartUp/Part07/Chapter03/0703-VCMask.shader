@@ -39,6 +39,10 @@
 			o.Albedo = lerp(c.rgb, d.rgb, IN.color.r);
 			o.Albedo = lerp(o.Albedo, e.rgb, IN.color.g);
 			o.Albedo = lerp(o.Albedo, f.rgb, IN.color.b);
+			o.Albedo =	c.rgb * (1-(IN.color.r + IN.color.g + IN.color.b))
+						+ d.rgb * IN.color.r
+						+ e.rgb * IN.color.g
+						+ f.rgb * IN.color.b				;
             o.Alpha = c.a;
         }
         ENDCG
