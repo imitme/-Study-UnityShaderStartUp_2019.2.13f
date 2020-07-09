@@ -42,6 +42,13 @@
 			o.Metallic = _Metallic;
 			o.Smoothness = _Smoothness;
             o.Alpha = c.a;
+
+			fixed3 n = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));//4. 변수사용//텍스쳐를 받아서, UnpackNormal함수로 추출해 사용!방법2
+			o.Normal = n;
+			o.Normal = float3(n.x * 10, n.y * 10, n.z);// 노멀 강도 조절하기 (강한경우)
+			o.Normal = float3(n.x * 0.1, n.y * 0.1, n.z);// 노멀 강도 조절하기 (약한경우) 
+			//ㄴ 강도조절시, z 축은 영향을 끼치지 않기에, 연산해줄 필요 없다. 단,1 이상이라면, 내부적으로 normalize하기에 약해질 수 있다!
+			
         }
         ENDCG
     }
