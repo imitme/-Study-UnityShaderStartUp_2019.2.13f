@@ -53,7 +53,7 @@
 						+ f.rgb * IN.color.b				;
 			o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
 			o.Metallic = _Matallic;
-			o.Smoothness = _Smoothness;
+			o.Smoothness =  (IN.color.b * 0.5) * _Smoothness + 0.35;
             o.Alpha = c.a;
         }
         ENDCG
