@@ -7,6 +7,8 @@
         _MainTex3 ("Albedo (RGB)", 2D) = "white" {}
         _MainTex4 ("Albedo (RGB)", 2D) = "white" {}
         _BumpMap ("NormalMap", 2D) = "bump" {}
+		_Matallic("Matallic",Range(0,1)) = 0
+		_Smoothness("Smoothness",Range(0,1)) = 0.5
     }
     SubShader
     {
@@ -22,6 +24,8 @@
         sampler2D _MainTex3;
         sampler2D _MainTex4;
         sampler2D _BumpMap;
+        float _Matallic;
+        float _Smoothness;
 
         struct Input
         {
@@ -48,6 +52,8 @@
 						+ e.rgb * IN.color.g
 						+ f.rgb * IN.color.b				;
 			o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
+			o.Metallic = _Matallic;
+			o.Smoothness = _Smoothness;
             o.Alpha = c.a;
         }
         ENDCG
