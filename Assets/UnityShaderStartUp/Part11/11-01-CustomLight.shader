@@ -27,12 +27,14 @@
         }
 		float4 LightingTest(SurfaceOutput s, float3 lightDir, float atten) //커스텀_라이팅함수만들기!  **함수명주의!!!  Lighting+(라이트명)   //해야, 라이트 함수로 받아드린다!
 		{
-			float ndotl = dot(s.Normal, lightDir);
+			float ndotl = max(0, dot(s.Normal, lightDir));
+			ndotl = saturate(dot(s.Normal, lightDir));
 			return ndotl;
 
 			/*
 		//아직, Lambert 라이트 완성X : 조명의 색 받지 못하는 등의 문제가 있다.
 		//빛을 비춰도 음수에 숫자를 더하게 되어 밝아지지 않는 문제 있음. >>0아래 전부 0으로 잘라버려라 라는 함수 필요!
+		ㄴ 0아래 전부 0으로 잘라버려라 라는 함수 == staturate . max사용
 			*/
 		}
 		/*
