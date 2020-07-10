@@ -7,12 +7,10 @@
     SubShader
     {
         Tags { "RenderType"="Opaque" }
-        LOD 200
 
         CGPROGRAM
-        #pragma surface surf Standard fullforwardshadows
+        #pragma surface surf Lambert noambient // Lambert 라이팅 // 환경광 제거(확실한 결과 확인하기 위해)
 
-        #pragma target 3.0
 
         sampler2D _MainTex;
 
@@ -21,7 +19,7 @@
             float2 uv_MainTex;
         };
 
-        void surf (Input IN, inout SurfaceOutputStandard o)
+        void surf (Input IN, inout SurfaceOutput o)
         {
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
             o.Albedo = c.rgb;
