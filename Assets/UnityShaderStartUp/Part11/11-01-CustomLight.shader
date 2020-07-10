@@ -3,6 +3,7 @@
     Properties
     {
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
+		_BumpMap("NormalMap", 2D) = "bump" {}
     }
     SubShader
     {
@@ -13,23 +14,26 @@
 
 
         sampler2D _MainTex;
+		sampler2D _BumpMap;
 
         struct Input
         {
             float2 uv_MainTex;
+			float2 uv_BumpMap;
         };
 
         void surf (Input IN, inout SurfaceOutput o)
         {
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
             o.Albedo = c.rgb;
+			o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
             o.Alpha = c.a;
         }
 		float4 LightingTest(SurfaceOutput s, float3 lightDir, float atten) //커스텀_라이팅함수만들기!  **함수명주의!!!  Lighting+(라이트명)   //해야, 라이트 함수로 받아드린다!
 		{
 			float ndotl = max(0, dot(s.Normal, lightDir));
 			ndotl = saturate(dot(s.Normal, lightDir));
-			return ndotl;
+			return ndotl + 0.5;
 
 			/*
 		//아직, Lambert 라이트 완성X : 조명의 색 받지 못하는 등의 문제가 있다.
