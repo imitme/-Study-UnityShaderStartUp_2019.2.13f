@@ -3,6 +3,8 @@
     Properties
     {
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        _RimColor ("RimColor", Color) = (1,1,1,1)
+        _RimPower ("RimPower", Range(1,10)) = 3
     }
     SubShader
     {
@@ -12,6 +14,8 @@
         #pragma surface surf Lambert noambient
 
         sampler2D _MainTex;
+		float4 _RimColor;	//색이니까, float4
+		float _RimPower;	//제곱근 수 하나이기에, float
 
         struct Input
         {
@@ -26,7 +30,7 @@
             o.Alpha = c.a;
 
 			float rim = dot(o.Normal, IN.viewDir);
-			o.Emission = pow(1 - rim, 3); //얇게 만들기위해, 3제곱 만들기!
+			o.Emission = pow(1 - rim, _RimPower) * _RimColor.rgb; //얇게 만들기위해, 3제곱 만들기!
 			
         }
         ENDCG
