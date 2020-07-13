@@ -12,7 +12,7 @@
         Tags { "RenderType"="Opaque" }
 
         CGPROGRAM
-        #pragma surface surf Lambert noambient
+        #pragma surface surf Lambert //환경광 받는 Lambert!
 
         sampler2D _MainTex;
         sampler2D _BumpMap;
@@ -33,7 +33,7 @@
 			o.Normal = UnpackNormal(tex2D(_BumpMap,IN.uv_BumpMap)); //Rim연산에서, Normal사용하기에, 반드시, Rim 연산 전에, NormalMap연산하기!
             o.Alpha = c.a;
 
-			float rim = dot(o.Normal, IN.viewDir);
+			float rim = saturate(dot(o.Normal, IN.viewDir));
 			o.Emission = pow(1 - rim, _RimPower) * _RimColor.rgb; //얇게 만들기위해, 3제곱 만들기!
 			
         }
