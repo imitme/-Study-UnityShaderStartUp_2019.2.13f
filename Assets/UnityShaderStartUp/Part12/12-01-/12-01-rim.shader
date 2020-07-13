@@ -26,7 +26,8 @@
             o.Alpha = c.a;
 
 			float rim = dot(o.Normal, IN.viewDir);
-			o.Emission = rim;
+			o.Emission = 1-rim; //dot연산은 -1까지 내려간다 잊지말기! >>Rim으로 보이나, 너무 두꺼워 느낌이 살지 않아, 흰 테두리를 더 얇게 만들어줄 필요가 있다.
+			
         }
         ENDCG
     }
