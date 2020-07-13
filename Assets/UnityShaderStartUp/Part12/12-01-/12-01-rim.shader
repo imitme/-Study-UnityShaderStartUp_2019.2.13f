@@ -16,13 +16,17 @@
         struct Input
         {
             float2 uv_MainTex;
+			float3 viewDir; //2. view Direction 받아오기(vertex to Camera) //lightDir (vertex to Light)
         };
 
         void surf (Input IN, inout SurfaceOutput o)
         {
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-            o.Albedo = c.rgb;
+            o.Albedo = 0;// 1. 검정색으로 만들기 : 순수한 Fresnel 공식 확인을 위해.
             o.Alpha = c.a;
+
+			float rim = dot(o.Normal, IN.viewDir);
+			o.Emission = rim;
         }
         ENDCG
     }
