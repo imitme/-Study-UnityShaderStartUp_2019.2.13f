@@ -4,6 +4,7 @@
     {
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _HolColor ("HologramColor (RGB)", Color) = (1,1,1,1)
+		_RimPower("RimPower", Range(0.1,10)) = 3
     }
     SubShader
     {
@@ -14,6 +15,7 @@
 
         sampler2D _MainTex;
         float4 _HolColor;
+		float _RimPower;
 
         struct Input
         {
@@ -26,7 +28,7 @@
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
 			o.Emission = _HolColor;
 			float rim = saturate(dot(o.Normal, IN.viewDir));
-			rim = pow(1 - rim, 3);
+			rim = pow(1 - rim, _RimPower);
             o.Alpha = rim;		//홀로그램 원리핵심 : Rim라이트 연산을 알파 패널에 넣는다!
         }
         ENDCG
