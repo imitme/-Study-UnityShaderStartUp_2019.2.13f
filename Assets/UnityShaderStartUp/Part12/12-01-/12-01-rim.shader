@@ -9,7 +9,7 @@
         Tags { "RenderType"="Opaque" }
 
         CGPROGRAM
-        #pragma surface surf Standard fullforwardshadows
+        #pragma surface surf Lambert noambient
 
         sampler2D _MainTex;
 
@@ -18,7 +18,7 @@
             float2 uv_MainTex;
         };
 
-        void surf (Input IN, inout SurfaceOutputStandard o)
+        void surf (Input IN, inout SurfaceOutput o)
         {
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
             o.Albedo = c.rgb;
