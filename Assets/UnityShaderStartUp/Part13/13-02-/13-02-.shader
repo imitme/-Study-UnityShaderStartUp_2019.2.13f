@@ -4,6 +4,8 @@
     {
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _BumpMap ("NormalMap", 2D) = "bump" {}
+        _SpecCol ("Specular Color",Color) = (1,0,0,1)
+        _SpecPow ("Specular Power",Range(10,200)) = 100
     }
     SubShader
     {
@@ -15,6 +17,8 @@
 
         sampler2D _MainTex;
         sampler2D _BumpMap;
+        float4 _SpecCol;
+        float _SpecPow;
 
         struct Input
         {
@@ -40,12 +44,15 @@
             //Spec term
             float3 H = normalize(lightDir + viewDir); //조명벡터와 카메라 벡터 더한 값을 normalize해서, 1로 만든 후 H에 집어넣음. 즉, 조명벡터와 카메라벡터의 중간인 하프벡터!
             float spec = saturate(dot(H, s.Normal)); //H : 벡터 덧셈연산이기에 float3 // spec : 벡터 내적연산이기에, float
-            spec = pow(spec, 100); //내적영역 줄여주어, 스펙큘러 넓이 줄여주기
+            spec = pow(spec, _SpecPow); //내적영역 줄여주어, 스펙큘러 넓이 줄여주기
+            float3 SpecColor;
+            SpecColor = spec * _SpecCol.rgb;
 
             //final term
             float4 final;
             final.rgb = DiffColor.rgb;
             final.a = s.Alpha;
+            return float4(SpecColor, 1);
             return spec; //스펙큘러 연산결과 확인용
             return float4(H,1); //H 확인용
             return final;
