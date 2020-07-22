@@ -25,7 +25,7 @@
             o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
             o.Emission =float3(0,1,0);
 			float rim = saturate(dot(o.Normal, IN.viewDir));
-			rim = saturate(pow(1 - rim, 3) + pow(frac(IN.worldPos.g * 3 - _Time.y), 5) *0.1);
+			rim = saturate(pow(1 - rim, 3) + pow(frac(IN.worldPos.g * 30 - _Time.y), 5) *0.1); //속도 빠르게 하면 줄무늬 많아져!
             o.Alpha = rim;
         }
 
