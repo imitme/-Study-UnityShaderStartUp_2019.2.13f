@@ -22,10 +22,10 @@
         void surf (Input IN, inout SurfaceOutput o)
         {
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-			o.Emission = float3(0,1,0);
+			o.Emission = 0; //검정색으로 그리기
 			float rim = saturate(dot(o.Normal, IN.viewDir));
 			rim = pow(1 - rim, 3);
-            o.Alpha = rim;
+            o.Alpha = 1; //불투명하게 만들기
         }
         ENDCG
     }
