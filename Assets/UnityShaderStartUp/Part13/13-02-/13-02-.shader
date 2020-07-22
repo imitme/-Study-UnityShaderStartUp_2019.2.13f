@@ -10,10 +10,9 @@
     SubShader
     {
         Tags { "RenderType"="Opaque" }
-        LOD 200
 
         CGPROGRAM
-        #pragma surface surf Test noambient //환경광 꺼서, 음영 확실하게 보이게 하기
+        #pragma surface surf Test  
 
         sampler2D _MainTex;
         sampler2D _BumpMap;
@@ -34,7 +33,7 @@
             o.Alpha = c.a;
         }
 
-        float4 LightingTest(SurfaceOutput s, float3 lightDir, float3 viewDir, float atten) //커스텀 라이트 함수 인자는 지정되어 있으며, 임의로 인자 순서를 바꿀 수 없다!
+        float4 LightingTest(SurfaceOutput s, float3 lightDir, float3 viewDir, float atten) 
         {
             //Lambert term
             float3 DiffColor;
@@ -42,21 +41,17 @@
             DiffColor = ndotl * s.Albedo * _LightColor0.rgb * atten;
 
             //Spec term
-            float3 H = normalize(lightDir + viewDir); //조명벡터와 카메라 벡터 더한 값을 normalize해서, 1로 만든 후 H에 집어넣음. 즉, 조명벡터와 카메라벡터의 중간인 하프벡터!
-            float spec = saturate(dot(H, s.Normal)); //H : 벡터 덧셈연산이기에 float3 // spec : 벡터 내적연산이기에, float
-            spec = pow(spec, _SpecPow); //내적영역 줄여주어, 스펙큘러 넓이 줄여주기
+            float3 H = normalize(lightDir + viewDir); 
+            float spec = saturate(dot(H, s.Normal)); 
+            spec = pow(spec, _SpecPow); 
             float3 SpecColor;
             SpecColor = spec * _SpecCol.rgb;
 
             //final term
             float4 final;
-            final.rgb = DiffColor.rgb + SpecColor.rgb; //스펙큘러 됏으니, Lambert 연산 결과물에, DiffColor와 더해,
+            final.rgb = DiffColor.rgb + SpecColor.rgb; 
             final.a = s.Alpha;
-            return final; //최종 결과물이 나오도록! 해준다!
-            return float4(SpecColor, 1);
-            return spec; //스펙큘러 연산결과 확인용
-            return float4(H,1); //H 확인용
-            return final;
+            return final; 
         }
         ENDCG
     }
