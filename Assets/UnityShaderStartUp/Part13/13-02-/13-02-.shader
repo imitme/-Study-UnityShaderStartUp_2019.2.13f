@@ -50,8 +50,9 @@
 
             //final term
             float4 final;
-            final.rgb = DiffColor.rgb;
+            final.rgb = DiffColor.rgb + SpecColor.rgb; //스펙큘러 됏으니, Lambert 연산 결과물에, DiffColor와 더해,
             final.a = s.Alpha;
+            return final; //최종 결과물이 나오도록! 해준다!
             return float4(SpecColor, 1);
             return spec; //스펙큘러 연산결과 확인용
             return float4(H,1); //H 확인용
