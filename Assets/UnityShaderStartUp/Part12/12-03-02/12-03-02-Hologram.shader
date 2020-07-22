@@ -23,10 +23,10 @@
         void surf (Input IN, inout SurfaceOutput o)
         {
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-            o.Emission =pow( frac(IN.worldPos.g * 3 - _Time.y), 30 ); //worldPos 출력; Y 아래서 위로 흐르도록, _Time.y 빼서 위로 흐르게 하기!
+            o.Emission =float3(0,1,0);
 			float rim = saturate(dot(o.Normal, IN.viewDir));
-			rim = pow(1 - rim, 3);
-            o.Alpha = 1; //불투명하게 만들기
+			rim = pow(1 - rim, 3) + pow(frac(IN.worldPos.g * 3 - _Time.y), 30);
+            o.Alpha = rim; //불투명하게 만들기 //세로줄 넓ㅅ이나 개수 조정하도록
         }
         ENDCG
     }
