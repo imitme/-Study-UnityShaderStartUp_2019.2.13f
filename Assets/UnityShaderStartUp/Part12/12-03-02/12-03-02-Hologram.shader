@@ -23,7 +23,7 @@
         void surf (Input IN, inout SurfaceOutput o)
         {
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-            o.Emission = IN.worldPos.g; //worldPos 출력; Y출만 필요 << 상하의 값만 필요하기에!
+            o.Emission =pow( frac(IN.worldPos.g), 30 ); //worldPos 출력; Y에 소수점만 리턴 <<흰부분줄이기.
 			float rim = saturate(dot(o.Normal, IN.viewDir));
 			rim = pow(1 - rim, 3);
             o.Alpha = 1; //불투명하게 만들기
