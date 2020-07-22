@@ -23,7 +23,7 @@
         void surf (Input IN, inout SurfaceOutput o)
         {
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-            o.Emission = IN.worldPos.rgb; //worldPos 출력; xyz가 각각 rgb에 대입 (물체를 이동시키면,색이 변한다 << worldPosition값이 나오기에!)
+            o.Emission = IN.worldPos.g; //worldPos 출력; Y출만 필요 << 상하의 값만 필요하기에!
 			float rim = saturate(dot(o.Normal, IN.viewDir));
 			rim = pow(1 - rim, 3);
             o.Alpha = 1; //불투명하게 만들기
