@@ -40,6 +40,7 @@
             //Spec term
             float3 H = normalize(lightDir + viewDir); //조명벡터와 카메라 벡터 더한 값을 normalize해서, 1로 만든 후 H에 집어넣음. 즉, 조명벡터와 카메라벡터의 중간인 하프벡터!
             float spec = saturate(dot(H, s.Normal)); //H : 벡터 덧셈연산이기에 float3 // spec : 벡터 내적연산이기에, float
+            spec = pow(spec, 100); //내적영역 줄여주어, 스펙큘러 넓이 줄여주기
 
             //final term
             float4 final;
