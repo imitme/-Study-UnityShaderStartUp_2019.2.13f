@@ -11,7 +11,7 @@
         LOD 200
 
         CGPROGRAM
-        #pragma surface surf Test
+        #pragma surface surf Test noambient //환경광 꺼서, 음영 확실하게 보이게 하기
 
         sampler2D _MainTex;
         sampler2D _BumpMap;
@@ -32,9 +32,14 @@
 
         float4 LightingTest(SurfaceOutput s, float3 lightDir, float atten)
         {
+            //Lambert term
+            float3 DiffColor;
             float ndotl = saturate(dot(s.Normal, lightDir));
+            DiffColor = ndotl * s.Albedo * _LightColor0.rgb * atten;
+
+            //final term
             float4 final;
-            final.rgb = ndotl * s.Albedo * _LightColor0.rgb * atten;
+            final.rgb = DiffColor.rgb;
             final.a = s.Alpha;
             return final;
         }
