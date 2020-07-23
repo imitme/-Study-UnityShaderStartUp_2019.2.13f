@@ -7,6 +7,11 @@
         _SpecCol ("Specular Color",Color) = (1,0,0,1)
         _SpecPow ("Specular Power",Range(10,200)) = 100
         _GlossTex("Gloss Tex",2D) = "white"{}
+        
+        _SpecCol2("Specular Color2",Color) = (1,1,1,1)
+        _SpecPow2("Specular Power2",Range(10,200)) = 100
+        _RimCol("Rim Color",Color) = (1,1,1,1)
+        _RimcPow("Rim Power",Range(1,10)) = 3
     }
     SubShader
     {
@@ -20,6 +25,11 @@
         sampler2D _GlossTex;
         float4 _SpecCol;
         float _SpecPow;
+
+        float4 _SpecCol2;
+        float _SpecPow2;
+        float4 _RimCol;
+        float _RimcPow;
 
         struct Input
         {
@@ -56,11 +66,15 @@
             float3 rimColor;
             float rim = abs(dot(viewDir, s.Normal));
             float invrim = 1 - rim;
-            rimColor = pow(invrim, 6) * float3(0.5, 0.5, 0.5);
+            rimColor = pow(invrim, _RimcPow) * _RimCol.rgb;
+
+            //Fake Spec term
+            float3 SpecColor2;
+            SpecColor2 = pow(rim, _SpecPow2) * _SpecCol2.rgb * s.Gloss;
 
             //final term
             float4 final;
-            final.rgb = DiffColor.rgb + SpecColor.rgb + rimColor.rgb; 
+            final.rgb = DiffColor.rgb + SpecColor.rgb + rimColor.rgb + SpecColor2.rgb; 
             final.a = s.Alpha;
             return final; 
         }
