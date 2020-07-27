@@ -14,7 +14,7 @@
 
         //1st Pass
         CGPROGRAM
-        #pragma surface surf Lambert vertex:vert
+        #pragma surface surf Lambert vertex:vert noshadow//addshadow//noshadow
 
         sampler2D _MainTex;
 
