@@ -20,7 +20,7 @@
 
         void vert(inout appdata_full v)
         {
-            v.vertex.xyz = v.vertex.xyz + v.normal.xyz *0.01 * sin(_Time.y); //모든 벡터는 길이가 1로 되어 있기에, 각 버텍스가 노멀 방향으로 1유닛(1m) 으로 이동하니, *0.01 해주면(1cm) 확장된 모습 확인가능.
+            v.vertex.xyz = v.vertex.xyz + v.normal.xyz * 0.01;// *sin(_Time.y); //모든 벡터는 길이가 1로 되어 있기에, 각 버텍스가 노멀 방향으로 1유닛(1m) 으로 이동하니, *0.01 해주면(1cm) 확장된 모습 확인가능.
         }
 
         struct Input
