@@ -57,6 +57,14 @@
         {
             float ndotl = dot(s.Normal, lightDir) * 0.5 + 0.5;
 
+            if (ndotl > 0.5)
+            {
+                ndotl = 1;
+            }
+            else
+            {
+                ndotl = 0.3;
+            }
             return ndotl;
         }
         ENDCG
