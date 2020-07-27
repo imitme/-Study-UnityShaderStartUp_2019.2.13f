@@ -1,4 +1,4 @@
-﻿Shader "ShaderStudy/Part14/14-03-2passToon"
+﻿Shader "ShaderStudy/Part14/14-05-toon"
 {
     Properties
     {
