@@ -41,6 +41,7 @@
 
         ENDCG
 
+        cull back
         //2nd Pass
         CGPROGRAM
         #pragma surface surf Lambert
