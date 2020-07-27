@@ -11,10 +11,11 @@
         //cull back // 뒷면을 날리고, 앞면을 살리는(백페이스 컬링:뒷면 그리지 않는다는 것), 명시적 표현
         //cull front // 뒷면을 살리고, 앞면을 날리는(프론트 페이스 컬링:) 보여주는 면만 뒤집힌 것이지, 노멀이 뒤집힌 것은 아니다.
         //cull off // 뒷면을 살리고, 앞면도 살리는(일면 2side:)
+        cull front
 
         //1st Pass
         CGPROGRAM
-        #pragma surface surf Lambert vertex:vert noshadow//addshadow//noshadow
+        #pragma surface surf Nolight Lambert vertex:vert noshadow noambient //addshadow//noshadow
 
         sampler2D _MainTex;
 
@@ -26,14 +27,18 @@
         struct Input
         {
             float2 uv_MainTex;
+            //ㄴ아무것도 받지 않으면, 문제가 일어나기에, //float4 color:COLOR; 해도 됨.
         };
 
         void surf (Input IN, inout SurfaceOutput o)
         {
-            fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-            o.Albedo = c.rgb;
-            o.Alpha = c.a;
         }
+
+        float4 LightingNolight(SurfaceOutput s , float3 lightDir, float atten)
+        {
+            return float4(0,0,0,1);
+        }
+
         ENDCG
 
         ////2nd Pass
