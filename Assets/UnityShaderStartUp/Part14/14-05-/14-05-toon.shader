@@ -56,14 +56,17 @@
         float4 LightingToon(SurfaceOutput s, float3 lightDir, float atten)
         {
             float ndotl = dot(s.Normal, lightDir) * 0.5 + 0.5;
-
-            if (ndotl > 0.5)
+            if (ndotl > 0.7)
             {
                 ndotl = 1;
             }
-            else
+            else if (ndotl > 0.4)
             {
                 ndotl = 0.3;
+            }
+            else
+            {
+                ndotl = 0;
             }
             return ndotl;
         }
