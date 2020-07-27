@@ -55,7 +55,9 @@
 
         float4 LightingToon(SurfaceOutput s, float3 lightDir, float atten)
         {
-            return float4(1,0,0,1);
+            float ndotl = dot(s.Normal, lightDir) * 0.5 + 0.5;
+
+            return ndotl;
         }
         ENDCG
     }
