@@ -211,7 +211,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 120, y: -30, z: 0}
---- !u!1 &962469375
+--- !u!1 &675081025
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,8 +219,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 962469377}
-  - component: {fileID: 962469376}
+  - component: {fileID: 675081027}
+  - component: {fileID: 675081026}
   m_Layer: 0
   m_Name: SNAPPERS:Head (1)
   m_TagString: Untagged
@@ -228,13 +228,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!137 &962469376
+--- !u!137 &675081026
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962469375}
+  m_GameObject: {fileID: 675081025}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -245,7 +245,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e9bd6e9dbc35dc545b71f2588364d52d, type: 2}
+  - {fileID: 2100000, guid: 139b32584e41543449fb0e00166bd9a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -313,15 +313,15 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.000106960535, y: 0.38195625, z: 0.05128999}
     m_Extent: {x: 0.12819193, y: 0.19239798, z: 0.14469047}
   m_DirtyAABB: 0
---- !u!4 &962469377
+--- !u!4 &675081027
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962469375}
+  m_GameObject: {fileID: 675081025}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.324, z: 0}
+  m_LocalPosition: {x: 0, y: -0.348, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
